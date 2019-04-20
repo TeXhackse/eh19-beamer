@@ -1,0 +1,27 @@
+% !TeX program=lualatex
+\documentclass[aspectratio=169]{beamer}
+\usetheme{eh19}
+
+\begin{document}
+\titlegraphic{\includegraphics[width=1.5cm]{resources/hase}}
+\title{(Un)official Easterhegg 2019 Beamer Theme}
+\subtitle{\normalfont using Designs by @Columbia19@Twitter}
+\author{presented by the hopping \#eh19-rabbit and Marei}
+\institute{Supported by C3W}
+
+\frame{\titlepage}
+
+\begin{frame}[fragile]{Font \& Color}
+The color can be accessed as easterhegg \textcolor{easterhegg}{\rule{2cm}{2cm}}
+
+The fontfamily is loaded using fontspec as \verb+\easterheggfont+
+
+\easterheggfont This is an example.
+
+Unavailable characters are currently taken from Libtertinus äüöß!"§\%
+\end{frame}
+
+\begin{frame}{Folientitel}
+Folie mit Titel
+\end{frame}
+\end{document}

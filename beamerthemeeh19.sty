@@ -1,0 +1,144 @@
+\ProvidesPackage{beamerthemeeh19}
+
+\PassOptionsToPackage{sectionpage=simple}{beamerinnerthememetropolis}
+\PassOptionsToPackage{progressbar=foot}{beamerouterthememetropolis}
+\RequirePackage{beamerthememetropolis}
+
+\RequirePackage{fontspec}
+\RequirePackage{libertinus}
+\setmonofont{inconsolatan}
+
+
+\definecolor{easterhegg}{RGB}{0,103,153}
+
+\pgfkeys{/metropolis/color/.cd,
+	background=light,
+	block=fill,
+}
+
+\setbeamercolor{title}{fg=easterhegg}
+\setbeamercolor{headline framenumber}{fg=easterhegg}
+\setbeamercolor{peitex}{bg=easterhegg,fg=easterhegg}
+\setbeamercolor*{frametitle}{fg=white,bg=easterhegg}
+
+
+\setbeamercolor{progress bar}{%
+	use=easterhegg,
+	fg=easterhegg.fg,
+	bg=easterhegg.fg!50!black!30
+}
+
+\setbeamercolor{title separator}{
+	use=progress bar,
+	parent=progress bar
+}
+\setbeamercolor{progress bar in head/foot}{%
+	use=progress bar,
+	parent=progress bar
+}
+
+\setbeamercolor{progress bar in section page}{
+	use=progress bar,
+	parent=progress bar
+}
+
+\usepackage{fontspec}
+\newfontfamily{\easterheggfont}{easterhegg-libertinus.otf}[
+Ligatures={
+	NoCommon,
+	NoRequired,
+	NoContextual,
+	NoHistoric,
+	NoDiscretionary,
+	TeX
+	}
+]
+\setbeamerfont*{title}{family=\easterheggfont, size=\huge}
+\setbeamerfont*{subtitle}{family=\easterheggfont, size=\small}
+\setbeamerfont*{institute}{family=\easterheggfont, size=\small}
+\setbeamercolor{subtitle}{fg=black}
+\setbeamercolor{author}{fg=easterhegg}
+
+\setbeamertemplate{title graphic}{
+	\vbox to 0pt {
+		\vspace*{\baselineskip}
+		\inserttitlegraphic
+	}%
+	\nointerlineskip%
+	\vspace{3\baselineskip}
+}
+
+\setbeamertemplate{title}{
+	\raggedright%
+	\linespread{1.0}%
+	\inserttitle%
+	\par%
+	\vspace*{0.2em}
+}
+
+\setbeamertemplate{subtitle}{
+	\raggedright%
+	\insertsubtitle%
+	\par%
+	%	\vspace*{0.5em}
+}
+
+\makeatletter
+
+\setbeamertemplate{title separator}{
+	\vspace*{-.5\baselineskip}
+	\textcolor{fg}{\rule{\textwidth}{\metropolis@titleseparator@linewidth}}
+}
+
+
+\setbeamertemplate{progress bar in head/foot}{
+	\nointerlineskip
+	\ifnum\insertframenumber=1
+	\setlength\metropolis@progressinheadfoot{1.5\baselineskip}
+	\else
+	\ifnum\insertframenumber=\inserttotalframenumber
+	\setlength\metropolis@progressinheadfoot{\paperwidth-1.5\baselineskip}
+	\else
+	\setlength{\metropolis@progressinheadfoot}{%
+		\paperwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+	}%
+	\fi
+	\fi
+	\begin{beamercolorbox}[wd=\paperwidth]{progress bar in head/foot}
+		\begin{tikzpicture}
+		\fill[bg] (0,0) rectangle (\paperwidth, \metropolis@progressinheadfoot@linewidth);
+		\fill[fg] (0,0) rectangle (\metropolis@progressinheadfoot, \metropolis@progressinheadfoot@linewidth);
+		\begin{scope}[overlay]
+		\path (\metropolis@progressinheadfoot, \metropolis@progressinheadfoot@linewidth) ++(0, .1) ++ (0,rand*0.1) node[above, rotate=rand*30] {\includegraphics[height=1.5\baselineskip]{resources/hase}};
+		\end{scope}
+		\end{tikzpicture}
+	\end{beamercolorbox}
+}
+
+\AtBeginSection{
+	\ifbeamer@inframe
+	\sectionpage
+	\else
+	\frame[c,noframenumbering]{\sectionpage}
+	\fi
+}
+
+
+\renewcommand*{\sectionpage}{
+	\centering
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section title}
+		\usebeamerfont{section title}
+		\insertsectionhead\\[-1ex]
+		\usebeamertemplate*{progress bar in section page}
+		\par
+		\ifx\insertsubsectionhead\@empty\else%
+		\usebeamercolor[fg]{subsection title}%
+		\usebeamerfont{subsection title}%
+		\insertsubsectionhead
+		\fi
+	\end{minipage}
+}
+
+\endinput
